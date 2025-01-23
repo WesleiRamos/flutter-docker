@@ -1,0 +1,42 @@
+{
+  "name": "flutter_docker",
+  "build": {
+    "context": "..",
+    "dockerfile": "./Dockerfile"
+  },
+  "privileged": true,
+  "mounts": [
+    {
+      "type": "bind",
+      "source": "/dev/bus/usb",
+      "target": "/dev/bus/usb"
+    }
+  ],
+  "containerEnv": {
+    "ANDROID_ADB_SERVER_ADDRESS": "host.docker.internal"
+  },
+  "runArgs": [
+    "--network=host"
+  ],
+  "postStartCommand": {
+    "socat": "socat tcp-listen:6111,bind=127.0.0.1,fork tcp:host.docker.internal:6111"
+  },
+  "forwardPorts": [
+    6111,
+    6112
+  ],
+  "workspaceFolder": "/home/developer/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder}/workspace,target=/home/developer/workspace,type=bind,consistency=delegated",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dart-code.flutter",
+        "dart-code.dart-code",
+        "redhat.java"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  }
+}
