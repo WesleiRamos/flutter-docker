@@ -31,8 +31,7 @@
     "vscode": {
       "extensions": [
         "dart-code.flutter",
-        "dart-code.dart-code",
-        "redhat.java"
+        "dart-code.dart-code"
       ],
       "settings": {
         "terminal.integrated.defaultProfile.linux": "bash"
